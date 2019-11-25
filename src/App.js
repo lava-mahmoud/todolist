@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+import DisplayTodo from "./components/displayTodo";
+import AddToDo from "./components/addTodo";
+export class App extends Component {
+  state = {
+    items: [
+      {term:"go to bed",checked: false},
+      {term: "eate Breakfast",checked: false},
+       {term:"go to school",checked:false}]
+  };
+  addItem = terms => {
+    console.log("i am term", terms.term);
+    const newState = this.state.items;
+    var item={term:terms.term,checked:false};
+    newState.push(item);
+    console.log("haaallo", newState);
+    this.setState({ newState });
+  };
+  deleteToDo = item => {
+    console.log(item);
+    const index = this.state.items.indexOf(item);
+    console.log(index);
+    // eslint-disable-next-line
+    const newState = this.state.items.splice(index, 1);
+    console.log(this.state);
+
+    //this.state.items.splice(this.state.items.indexOf(item), 1);
+    this.forceUpdate();
+  };
+
+  handleCheck = (item) => {
+    const index=this.state.items.indexOf(item);
+    // console.log(index);
+    // console.log(this.state.items[index]);
+    // console.log("before",!this.state.items[index].checked);
+     // eslint-disable-next-line
+    this.state.items[index].checked=!this.state.items[index].checked;
+    //console.log("AFTER",!this.state.items[index].checked);
+    
+    this.forceUpdate();
+  };
+  render() {
+    return (
+      <div>
+        <DisplayTodo
+          items={this.state.items}
+          deleteToDo={this.deleteToDo}
+          handleCheck={this.handleCheck}
+        ></DisplayTodo>
+        <AddToDo addItem={this.addItem} />
+      </div>
+    );
+  }
 }
-
 export default App;
