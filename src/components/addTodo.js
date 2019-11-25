@@ -7,7 +7,6 @@ export default class AddTodo extends Component {
   handleChange = event => {
     const targetName = event.target.name;
     console.log(event.target.value);
-
     const targetValue = event.target.value;
     this.setState({
       [targetName]: targetValue
@@ -23,17 +22,27 @@ export default class AddTodo extends Component {
   };
   render() {
     return (
-      <div>
-        <from onSubmit={this.handleSubmit}>
-          <input
-            name="term"
-            type="text"
-            value={this.state.term}
-            onChange={this.handleChange}
-          ></input>
-          <input type="submit" value="add to do from input" />
-          <button onClick={this.handleSubmit}>add to do </button>
-        </from>
+      <div className="col-lg-12">
+        <nav className="navbar navbar-light bg-light">
+          <p className="navbar-brand">ADD TO DO</p>
+          <form onSubmit={this.handleSubmit} className="form-inline">
+            <input
+              name="term"
+              value={this.state.term}
+              onChange={this.handleChange}
+              className="form-control mr-sm-2"
+              type="text"
+              placeholder="add To do "
+            />
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              //onClick={this.handleSubmit}
+              type="submit"
+            >
+              add to do
+            </button>
+          </form>
+        </nav>
       </div>
     );
   }

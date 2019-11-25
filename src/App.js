@@ -43,13 +43,14 @@ export class App extends Component {
   };
   render() {
     return (
-      <div>
+      <div className='container'>
+        <AddToDo addItem={this.addItem} />
         <DisplayTodo
           items={this.state.items}
           deleteToDo={this.deleteToDo}
           handleCheck={this.handleCheck}
         ></DisplayTodo>
-        <AddToDo addItem={this.addItem} />
+        
       </div>
     );
   }
